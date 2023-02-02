@@ -41,6 +41,13 @@ npm run build
 ```sh
 npm run lint
 ```
+
+### Run Jest Component tests
+
+```sh
+npm run test:unit
+```
+
 ## Design Considerations
 
 1. Needed quick fix for UI so I opted to use [Core UI vue.js](https://coreui.io/vue/docs/getting-started/introduction.html) with prestyled components
