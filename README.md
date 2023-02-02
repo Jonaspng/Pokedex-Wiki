@@ -41,3 +41,9 @@ npm run build
 ```sh
 npm run lint
 ```
+## Design Considerations
+
+1. Needed quick fix for UI so I opted to use [Core UI vue.js](https://coreui.io/vue/docs/getting-started/introduction.html) with prestyled components
+2. Shifted all necessary data to a data folder and import them from component/views. This would help speed up future changes as I would only need change a single file.
+3. Used fetch function provided from JavaScript library to fetch data from API. Could have used axios but I was more familar with fetch.
+4. Considering to upgrade how data is fetch/rendered to reduce loading time. I will consider [virual scoller](https://github.com/Akryum/vue-virtual-scroller) during upgrading of website
