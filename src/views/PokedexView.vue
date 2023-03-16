@@ -5,15 +5,15 @@
     </div>
   <CContainer> 
     <div style='textAlign: center'>
-      <CSpinner v-if='pokemonData.length == 0' style='margin: 1rem'/>
+      <CSpinner v-if='this.pokemonData.length == 0' style='margin: 1rem'/>
     </div>
     <CRow>
       <CCol v-for='pokemon in pokemonData' :key='pokemon.id' lg='4' md='6' xs='12' style='padding: 2rem'>
         <PokeCard 
-          v-bind:name='pokemon.name'
-          v-bind:image="pokemon.sprites.other['official-artwork'].front_default"
-          v-bind:exp='pokemon.base_experience'
-          v-bind:index='pokemon.id' />
+          :name='pokemon.name'
+          :image="pokemon.sprites.other['official-artwork'].front_default"
+          :exp='pokemon.base_experience'
+          :index='pokemon.id' />
       </CCol>
     </CRow>
   </CContainer>
@@ -38,23 +38,24 @@
     components: {CContainer, CRow, CCol, PokeCard, CSpinner, RegionSelector},
     methods: {
       async getPokemon(region) {
-        this.pokemonData = [];
         let prelimData = [{name: 'test'}];
-        let finalData = [];
+        this.pokemonData = [];
         await fetch('https://pokeapi.co/api/v2/pokedex/' + region)
                 .then((res) => res.json())
                 .then((data) => prelimData = data);
-        for (let i = 0; i < prelimData.pokemon_entries.length; i ++) {
-          try {
-            await fetch('https://pokeapi.co/api/v2/pokemon/' + prelimData.pokemon_entries[i].pokemon_species.name)
-            .then(res => res.json())
-            .then(data => finalData.push(data));
-          } finally {
-            continue;
-          }
+        try {
+          await Promise.all(prelimData.pokemon_entries.map(data => {
+            fetch('https://pokeapi.co/api/v2/pokemon/' + data.pokemon_species.name)
+            .then((res) => res.json())
+            .then((data) => this.pokemonData.push(data));
+          }));
+        } catch(e) {
+          console.log(e);
         }
-        this.pokemonData = finalData;      
+        await this.pokemonData.sort((a, b) => a.id - b.id);
+
       }
+           
     }, 
     async beforeMount() {
       await this.getPokemon(this.curRegionUrl);
