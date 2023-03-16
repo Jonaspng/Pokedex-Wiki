@@ -6,10 +6,10 @@
       <CCollapse class='navbar-collapse' :visible='visible'>
         <CNavbarNav>
           <CNavItem>
-            <CNavLink id='link1' v-bind:href='link1'>{{linkName1}}</CNavLink>
+            <CNavLink id='link1' :href='link1'>{{linkName1}}</CNavLink>
           </CNavItem>
           <CNavItem>
-            <CNavLink id='link2' v-bind:href='link2'>{{linkName2}}</CNavLink>
+            <CNavLink id='link2' :href='link2'>{{linkName2}}</CNavLink>
           </CNavItem>
         </CNavbarNav>
       </CCollapse>

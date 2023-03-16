@@ -1,6 +1,6 @@
 <template>
   <CCard>
-    <CCardImage v-bind:src='image' style='padding: 1rem; background: lightGrey'/>
+    <CCardImage :src='image' style='padding: 1rem; background: lightGrey'/>
     <CCardBody>
       <CCardText id="exp" :style='pokemonExp'>Base-Exp: {{exp}}</CCardText>
       <CCardText id="index" :style='pokemonIndexNumber'>#{{index}}</CCardText>

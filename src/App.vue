@@ -21,10 +21,10 @@
 </script>
 
 <template>
-  <Navbar v-bind:linkName1='linkName1' 
-          v-bind:link1='link1' 
-          v-bind:linkName2='linkName2' 
-          v-bind:link2='link2' 
-          v-bind:brand='brand'/>
+  <Navbar :linkName1='linkName1' 
+          :link1='link1' 
+          :linkName2='linkName2' 
+          :link2='link2' 
+          :brand='brand'/>
   <RouterView/>
 </template>

@@ -8,12 +8,7 @@
 </template>
 
 <script>
-  import Pokecard from '../components/PokeCard.vue';
-
   export default {
-    name: 'AboutView',
-    components: {
-      Pokecard
-    }
+    name: 'AboutView'
   }
 </script>
