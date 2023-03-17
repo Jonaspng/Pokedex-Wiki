@@ -43,17 +43,16 @@
         await fetch('https://pokeapi.co/api/v2/pokedex/' + region)
                 .then((res) => res.json())
                 .then((data) => prelimData = data);
-        try {
-          await Promise.all(prelimData.pokemon_entries.map(data => {
-            fetch('https://pokeapi.co/api/v2/pokemon/' + data.pokemon_species.name)
-            .then((res) => res.json())
-            .then((data) => this.pokemonData.push(data));
-          }));
-        } catch(e) {
-          console.log(e);
-        }
-        await this.pokemonData.sort((a, b) => a.id - b.id);
-
+ 
+        await Promise.allSettled(prelimData.pokemon_entries.map(
+          data => fetch('https://pokeapi.co/api/v2/pokemon/' + data.pokemon_species.name).then((res) => res.json())))
+          .then((data) => {
+            data.map((pokemon) => {
+              if (pokemon.status == "fulfilled") {
+                this.pokemonData.push(pokemon.value);
+              }
+            })
+          })  
       }
            
     }, 
